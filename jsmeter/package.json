@@ -1,0 +1,13 @@
+{
+  "author": "Noah Peters <noahpeters@gmail.com>",
+  "name": "jsmeter",
+  "description": "JavaScript code metrics via static analysis",
+  "version": "1.0.1",
+  "homepage": "http://jsmeter.info",
+  "repository": {
+    "url": ""
+  },
+  "main": "jsmeter.js",
+  "dependencies": {},
+  "devDependencies": {}
+}
