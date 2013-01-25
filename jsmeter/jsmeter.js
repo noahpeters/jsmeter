@@ -1,9 +1,7 @@
 exports.jsmeter = (function () {
-	var basePath = process.cwd(),
-		fs = require("fs"),
-		tokens = require("./tokens"),
-		results = [],
+	var tokens = require("./tokens"),
 		events = require("events");
+        
 	tokens.setup();
 	
 	var SimpleEventedObject = function () {
@@ -22,7 +20,7 @@ exports.jsmeter = (function () {
 		try {
 			var parse = require("./parse").make_parse(),
 				tree = parse(source),
-				complexity = require("./complexity").make_complexity();
+				complexity = require("./complexity").make_complexity(),
 				out = {
 					text : "",
 					write : function (data) {
@@ -37,14 +35,9 @@ exports.jsmeter = (function () {
 			console.log("exception: " + ex);
 			console.dir(tree);
 		}
-		delete parse;
-		delete source;
-		delete tree;
-		
+        
 		return result;
 	};
-	
-	start();
 	
 	return {
 		run : runJsmeter
