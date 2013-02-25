@@ -229,7 +229,6 @@ exports.make_complexity = function() {
         node = function(n, nn, depth) {
             
             var i;
-            var ff;
             var nm = "";
             
             if (!n) {
