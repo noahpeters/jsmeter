@@ -5,7 +5,7 @@
   "version": "1.0.2",
   "homepage": "http://jsmeter.info",
   "repository": {
-    "url": ""
+    "url": "https://bitbucket.org/noahpeters/jsmeter.git"
   },
   "main": "jsmeter.js",
   "dependencies": {},
