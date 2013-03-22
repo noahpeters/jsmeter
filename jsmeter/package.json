@@ -2,7 +2,7 @@
   "author": "Noah Peters <noahpeters@gmail.com>",
   "name": "jsmeter",
   "description": "JavaScript code metrics via static analysis",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "http://jsmeter.info",
   "repository": {
     "url": "https://bitbucket.org/noahpeters/jsmeter.git"

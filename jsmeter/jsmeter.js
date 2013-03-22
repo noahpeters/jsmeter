@@ -15,7 +15,7 @@ exports.jsmeter = (function () {
 		}
 	});
 	
-	var runJsmeter = function (source, name) {
+	var runJsmeter = function (source, name, mode) {
 		var result = [];
 		try {
 			var parse = require("./parse").make_parse(),
@@ -28,9 +28,13 @@ exports.jsmeter = (function () {
 					}
 				};
 			complexity.complexity(tree, name);
-			complexity.renderStats(out, "JSON");
-						
-			result = JSON.parse(out.text);
+			complexity.renderStats(out, mode || "JSON");
+				
+            if (!mode || mode === "JSON") {    
+                result = JSON.parse(out.text);
+            } else {
+                result = out.text;
+            }
 		} catch (ex) {
 			console.log("exception: " + ex);
 			console.dir(tree);

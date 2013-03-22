@@ -34,13 +34,13 @@ this.setup = function() {
     
     // Transform a token object into an exception object and throw it.
     
-    Object.prototype.error = function (message, t) {
-        t = t || this;
-        t.name = "SyntaxError";
-        t.message = message;
-        debugger;
-        throw t;
-    };
+//    Object.prototype.error = function (message, t) {
+//        t = t || this;
+//        t.name = "SyntaxError";
+//        t.message = message;
+//        debugger;
+//        throw t;
+//    };
 
     String.prototype.tokens = function (prefix, suffix) {
         var operators = [
@@ -138,7 +138,14 @@ this.setup = function() {
                 value: value,
                 from: from,
                 to: i,
-                line: l
+                line: l,
+                error: function (message, t) {
+                    t = t || this;
+                    t.name = "SyntaxError";
+                    t.message = message;
+                    debugger;
+                    throw t;
+                }
             };
         };
     
