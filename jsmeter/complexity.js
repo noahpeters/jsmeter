@@ -51,6 +51,9 @@ exports.make_complexity = function() {
         itself = {},
         
         sigDig = function(value, sd) {
+            if (isNaN(value)) {
+                return null;
+            }
             if (value===0) {
                 return 0;
             }
