@@ -5,6 +5,13 @@
 // Douglas Crockford
 // 2008-07-07
 
+var error = function (message, t) {
+    t = t || this;
+    t.name = "SyntaxError";
+    t.message = message;
+    throw t;
+};
+
 exports.make_parse = function () {
     var scope;
     var symbol_table = {};
@@ -83,7 +90,7 @@ exports.make_parse = function () {
     var advance = function (id) {
         var a, o, t, v, cl, cli;
         if (id && token.id !== id) {
-            token.error("Expected '" + id + "'.");
+            error.call(token, "Expected '" + id + "'.");
         }
         if (token_nr >= tokens.length) {
             token = symbol_table["(end)"];
@@ -98,7 +105,7 @@ exports.make_parse = function () {
         } else if (a === "operator") {
             o = symbol_table[v];
             if (!o) {
-                t.error("Unknown operator.");
+                error.call(t, "Unknown operator.");
             }
         } else if (a === "string" || a ===  "number" || a === "regexp" || a === "regexpops") {
             o = symbol_table["(literal)"];
@@ -106,7 +113,7 @@ exports.make_parse = function () {
         } else if (a === "comment") {
             o = symbol_table["(comment)"];
         } else {
-            t.error("Unexpected token.");
+            error.call(t, "Unexpected token.");
         }
         token = Object.create(o);
         token.from  = t.from;
@@ -201,7 +208,7 @@ exports.make_parse = function () {
             //this.error("Undefined.");
         },
         led: function (left) {
-            this.error("Missing operator.");
+            error.call(this, "Missing operator.");
         }
     };
 
@@ -258,7 +265,7 @@ exports.make_parse = function () {
     var assignment = function (id) {
         return infixr(id, 10, function (left) {
             if (left.id !== "." && left.id !== "[" && left.arity !== "name") {
-                left.error("Bad lvalue.");
+                error.call(left, "Bad lvalue.");
             }
             this.first = left;
             this.second = expression(9);
@@ -465,7 +472,7 @@ exports.make_parse = function () {
         if (token.id !== ")") {
             while (true) {
                 if (token.arity !== "name") {
-                    token.error("Expected a parameter name.");
+                    error.call(token, "Expected a parameter name.");
                 }
                 scope.define(token);
                 a.push(token);
@@ -511,7 +518,7 @@ exports.make_parse = function () {
             while (true) {
                 n = token;
                 if (n.arity !== "name" && n.arity !== "literal") {
-                    token.error("Bad property name.");
+                    error.call(token, "Bad property name.");
                 }
                 advance();
                 advance(":");
@@ -557,7 +564,7 @@ exports.make_parse = function () {
         while (true) {
             n = token;
             if (n.arity !== "name") {
-                n.error("Expected a new variable name.");
+                error.call(n, "Expected a new variable name.");
             }
             scope.define(n);
             advance();

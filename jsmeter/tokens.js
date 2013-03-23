@@ -143,7 +143,6 @@ this.setup = function() {
                     t = t || this;
                     t.name = "SyntaxError";
                     t.message = message;
-                    debugger;
                     throw t;
                 }
             };
