@@ -36,8 +36,9 @@ exports.jsmeter = (function () {
                 result = out.text;
             }
 		} catch (ex) {
-			console.log("exception: " + ex);
+			console.log("exception: " + ex.toString());
 			console.dir(tree);
+            result = ex;
 		}
         
 		return result;
