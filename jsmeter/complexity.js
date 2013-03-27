@@ -60,9 +60,9 @@ exports.make_complexity = function() {
             var z = Math.ceil(Math.log(value)/Math.log(10)),
                 v = Math.round(value * Math.pow(10, 0-z+sd)),
                 l = (""  + v).length;
-            v = v * Math.pow(10, z-sd);
+            v = v * Math.pow(10, z-sd)||0;
             if (l-z<sd) {
-                v = (""+v).substr(0,sd+1);
+                v = (""+v).substr(0,sd+1)||"";
                 if (v.indexOf(".")<0) {
                     v = v + ".";
                 }
@@ -70,7 +70,7 @@ exports.make_complexity = function() {
                     v = v + "0";
                 }
             } else if (l<=sd) {
-                v = (""+v).substr(0,l-z+2);
+                v = (""+v).substr(0,l-z+2)||"";
                 if (v.indexOf(".")<0) {
                     v = v + ".";
                 }
