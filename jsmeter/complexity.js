@@ -397,14 +397,19 @@ exports.make_complexity = function() {
         
         if (mode === "JSON") {
             for (i in fns) {
-                if (!Array[i] && !Array.prototype[i]) {
-                    fns[i].complexity = fns[i].complexityF();
-                    fns[i].mi = fns[i].miF();
-                    fns[i].halsteadLevel = fns[i].halsteadLevelF();
-                    fns[i].lines = fns[i].linesF();
-                    fns[i].commentPct = fns[i].comments / fns[i].lines;
-                    fns[i].halsteadVolume = fns[i].halsteadVolumeF();
-                    fns[i].halsteadPotential = fns[i].halsteadPotentialF();
+                try {
+                    if (!Array[i] && !Array.prototype[i]) {
+                        fns[i].complexity = fns[i].complexityF();
+                        fns[i].mi = fns[i].miF();
+                        fns[i].halsteadLevel = fns[i].halsteadLevelF();
+                        fns[i].lines = fns[i].linesF();
+                        fns[i].commentPct = fns[i].comments / fns[i].lines;
+                        fns[i].halsteadVolume = fns[i].halsteadVolumeF();
+                        fns[i].halsteadPotential = fns[i].halsteadPotentialF();
+                    }
+                } catch (ex) {
+                    console.dir(fns[i]);
+                    console.dir(ex);
                 }
             }                
             d.write(JSON.stringify(fns, null, 4));
