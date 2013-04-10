@@ -477,7 +477,7 @@ exports.make_parse = function () {
                 scope.define(token);
                 a.push(token);
                 advance();
-                if (token.id !== ",") {
+                if (token.id !== "," || token.id !== "=") {
                     break;
                 }
                 advance(",");
