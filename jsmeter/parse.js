@@ -271,9 +271,9 @@ exports.make_parse = function () {
             this.second = expression(9);
             this.assignment = true;
             this.arity = "binary";
-            if (token.id===",") {
-                advance(",");
-            }
+            // if (token.id===",") {
+            //     advance(",");
+            // }
             return this;
         });
     };
@@ -471,13 +471,14 @@ exports.make_parse = function () {
         advance("(");
         if (token.id !== ")") {
             while (true) {
-                if (token.arity !== "name") {
-                    error.call(token, "Expected a parameter name.");
-                }
-                scope.define(token);
-                a.push(token);
-                advance();
-                if (token.id !== "," && token.id !== "=") {
+                // if (token.arity !== "name") {
+                //     error.call(token, "Expected a parameter name.");
+                // }
+                // scope.define(token);
+                // a.push(token);
+                // advance();
+                a.push(statement());
+                if (token.id !== ",") {
                     break;
                 }
                 advance(",");
